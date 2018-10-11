@@ -28,8 +28,6 @@
     - 127.0.0.1
     - ::1
     - localhost
-    # when: mysql_root_new_pass != mysql_root_old_pass and
-    #       mysql_root_new_pass != ""
 
 - name: MySQL - Delete anonymous mysql user
   mysql_user:
