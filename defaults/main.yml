@@ -4,9 +4,9 @@ mysql_version: 5.7
 dependences:
   - python-mysqldb
 
-mysql_root_new_pass: mysqlrootpassword
+mysql_root_new_pass: 
 mysql_root_old_pass: ''
 mysql_root_user: root
 
 mysqldb_username: user
-mysql_user_password: password
+mysql_user_password: 
