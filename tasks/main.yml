@@ -3,6 +3,7 @@
   apt:
     pkg: mysql-server-{{ mysql_version }}
     state: present
+    update_cache: true
 
 - name: Installing dependences {{ dependences }}
   apt:
@@ -10,8 +11,8 @@
     state: present
 
 - name: Enable and start MySQL
-  systemd:
-    name: mysqld
+  service:
+    name: mysql
     enabled: true
     state: started
 
@@ -43,8 +44,3 @@
     state: absent
     login_user: root
     login_password: "{{ mysql_root_new_pass }}"
-
-- name: Restart MySQL
-  service:
-    name: mysql
-    state: restarted
