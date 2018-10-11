@@ -3,6 +3,7 @@
   apt:
     pkg: mysql-server-{{ mysql_version }}
     state: present
+    update_cache: true
 
 - name: Installing dependences {{ dependences }}
   apt:
