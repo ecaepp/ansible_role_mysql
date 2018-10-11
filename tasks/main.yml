@@ -11,8 +11,8 @@
     state: present
 
 - name: Enable and start MySQL
-  systemd:
-    name: mysqld
+  service:
+    name: mysql
     enabled: true
     state: started
 
