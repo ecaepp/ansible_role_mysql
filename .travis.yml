@@ -1,0 +1,17 @@
+---
+language: python
+services: docker
+
+env:
+  global:
+    - ROLE_NAME: mysql
+
+  matrix:
+    - MOLECULE_DISTRO: ubuntu1604
+      MOLECULE_DOCKER_COMMAND: /usr/lib/systemd/systemd
+
+install:
+  - pip install molecule docker
+
+script:
+  - molecule test
