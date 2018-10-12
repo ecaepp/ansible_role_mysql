@@ -8,10 +8,18 @@ env:
 
   matrix:
     - MOLECULE_DISTRO: ubuntu1604
-      MOLECULE_DOCKER_COMMAND: /usr/lib/systemd/systemd
+      MOLECULE_DOCKER_COMMAND: /bin/systemd
+
+before_script:
+  # Use actual Ansible Galaxy role name for the project directory.
+  - cd ../
+  - mv ansible_role_$ROLE_NAME ecaepp.$ROLE_NAME
+  - cd ecaepp.$ROLE_NAME
 
 install:
   - pip install molecule docker
 
 script:
   - molecule test
+notifications:
+  webhooks: https://galaxy.ansible.com/api/v1/notifications/
