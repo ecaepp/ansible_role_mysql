@@ -19,7 +19,11 @@ before_script:
 install:
   - pip install molecule docker
 
-script:
-  - molecule test
+jobs:
+  include:
+    - stage: test
+      name: Molecule testing
+      script: 
+        - molecule test
 notifications:
   webhooks: https://galaxy.ansible.com/api/v1/notifications/
