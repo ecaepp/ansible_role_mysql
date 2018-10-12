@@ -21,9 +21,8 @@ install:
 
 jobs:
   include:
-    - stage: test
-      name: Molecule testing
-      script: 
-        - molecule test
+    - stage: "test"
+      name: "Molecule testing"
+      script: molecule test
 notifications:
   webhooks: https://galaxy.ansible.com/api/v1/notifications/
