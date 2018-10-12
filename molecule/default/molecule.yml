@@ -10,6 +10,7 @@ platforms:
     image: geerlingguy/docker-${MOLECULE_DISTRO:-ubuntu1604}-ansible
     command: ${MOLECULE_DOCKER_COMMAND:-"sleep infinity"}
     privileged: true
+    pull: true
     pre_build_image: true
 provisioner:
   name: ansible
