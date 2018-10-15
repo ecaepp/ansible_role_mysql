@@ -1,3 +1,7 @@
+[![Build Status](https://travis-ci.com/ecaepp/ansible_role_mysql.svg?branch=master)](https://travis-ci.com/ecaepp/ansible_role_mysql)
+
+[![Coverage Status](https://coveralls.io/repos/github/ecaepp/ansible_role_mysql/badge.svg?branch=master)](https://coveralls.io/github/ecaepp/ansible_role_mysql?branch=master)
+
 ansible_role_mysql
 =========
 
