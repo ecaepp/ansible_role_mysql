@@ -42,3 +42,11 @@
     state: absent
     login_user: root
     login_password: "{{ mysql_root_new_pass }}"
+
+- name: Generate /etc/my.cnf config
+  template:
+    src: templates/server.cnf.j2
+    dest: /etc/mysql/my.cnf
+    owner: root
+    group: root
+    mode: 0644
