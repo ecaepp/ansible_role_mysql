@@ -1,3 +1,4 @@
+---
 language: python
 services: docker
 
@@ -30,4 +31,3 @@ deploy:
 
 notifications:
   webhooks: https://galaxy.ansible.com/api/v1/notifications/
-  
