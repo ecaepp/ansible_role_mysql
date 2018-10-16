@@ -19,6 +19,9 @@ before_script:
 install:
   - pip install molecule docker
 
+stages:
+  - test
+  - deploy
 jobs:
   include:
     - stage: "test"
