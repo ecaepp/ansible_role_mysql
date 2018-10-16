@@ -1,17 +1,15 @@
----
 language: python
 services: docker
 
 env:
   global:
     - ROLE_NAME: mysql
-
+    - TRAVIS_SECURE_ENV_VARS: true
   matrix:
     - MOLECULE_DISTRO: ubuntu1604
-      MOLECULE_DOCKER_COMMAND: /bin/systemd
+    - MOLECULE_DOCKER_COMMAND: "/bin/systemd"
 
 before_script:
-  # Use actual Ansible Galaxy role name for the project directory.
   - cd ../
   - mv ansible_role_$ROLE_NAME ecaepp.$ROLE_NAME
   - cd ecaepp.$ROLE_NAME
@@ -19,13 +17,17 @@ before_script:
 install:
   - pip install molecule docker
 
-stages:
-  - test
-  - deploy
-jobs:
-  include:
-    - stage: "test"
-      name: "Molecule testing"
-      script: molecule test
+script: molecule test
+deploy:
+  provider: releases
+  api_key:
+    secure: $SECURE_API_TOKEN
+  file: ansible_role_mysql
+  on:
+    repo: ecaepp/ansible_role_mysql
+    branch: master
+    tags: true
+
 notifications:
   webhooks: https://galaxy.ansible.com/api/v1/notifications/
+  
