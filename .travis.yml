@@ -21,8 +21,8 @@ install:
 script: molecule test
 
 before_deploy:
-  - git config --local user.name "$GITHUB_USER"
-  - git config --local user.email "$GITHUB_EMAIL"
+  - git config --local user.name $GITHUB_USER
+  - git config --local user.email $GITHUB_EMAIL
 deploy:
   provider: releases
   api_key:
