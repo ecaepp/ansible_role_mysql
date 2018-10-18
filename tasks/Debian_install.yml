@@ -1,0 +1,15 @@
+---
+- name: Down MySQL apt repo pkg
+  apt:
+    deb: "{{ mysql_apt_config_url }}"
+
+- name: Installing MySQL-{{ mysql_version }}
+  apt:
+    pkg: mysql-server
+    state: present
+    update_cache: true
+
+- name: Installing dependences {{ dependences }}
+  apt:
+    pkg: "{{ dependences }}"
+    state: present

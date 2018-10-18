@@ -1,14 +1,7 @@
 ---
-- name: Installing MySQL-{{ mysql_version }}
-  apt:
-    pkg: mysql-server-{{ mysql_version }}
-    state: present
-    update_cache: true
-
-- name: Installing dependences {{ dependences }}
-  apt:
-    pkg: "{{ dependences }}"
-    state: present
+- name: Installing MySQL server for {{ ansible_distribution }}-{{ ansible_distribution_version }}
+  include_tasks: Debian_install.yml
+  when: ansible_os_family == 'Debian'
 
 - name: Enable and start MySQL
   service:
