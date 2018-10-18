@@ -23,15 +23,16 @@ script: molecule test
 # before_deploy:
 #   - git config --local user.name $GITHUB_USER
 #   - git config --local user.email $GITHUB_EMAIL
-deploy:
-  provider: releases
-  api_key:
-    secure: $GITHUB_API_TOKEN
-  file: ansible_role_mysql
-  on:
-    repo: ecaepp/ansible_role_mysql
-    branch: master
-    tags: true
-
-notifications:
-  webhooks: https://galaxy.ansible.com/api/v1/notifications/
+after_success:
+  deploy:
+    provider: releases
+    api_key:
+      secure: $GITHUB_API_TOKEN
+    file: ansible_role_mysql
+    on:
+      repo: ecaepp/ansible_role_mysql
+      branch: master
+      tags: true
+    
+  notifications:
+    webhooks: https://galaxy.ansible.com/api/v1/notifications/
