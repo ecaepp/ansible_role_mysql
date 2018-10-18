@@ -39,7 +39,7 @@
 - name: Generate /etc/my.cnf config
   template:
     src: templates/server.cnf.j2
-    dest: /etc/mysql/my.cnf
+    dest: /etc/mysql/conf.d/my.cnf
     owner: root
     group: root
     mode: 0644

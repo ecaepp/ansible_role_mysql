@@ -21,7 +21,7 @@ def test_mysql_installed(host):
 
 
 def test_config_file(host):
-    config_file = host.file("/etc/mysql/my.cnf")
+    config_file = host.file("/etc/mysql/conf.d/my.cnf")
     assert config_file.user == 'root'
     assert config_file.group == 'root'
     assert config_file.mode == 0o644
