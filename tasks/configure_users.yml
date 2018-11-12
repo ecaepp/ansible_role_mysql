@@ -17,9 +17,3 @@
     src: templates/root.cnf.j2
     dest: /root/.my.cnf
   notify: "restart mysql"
-
-- name: Restart MySQL
-  service:
-    name: mysql
-    enabled: true
-    state: restarted
