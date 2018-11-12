@@ -8,7 +8,8 @@
   - ansible_os_family == 'Debian'
   - mysql_bin.stat.exists == False
 
-- include_tasks: configure_users.yml
+- name: MySQL - Secure Setup
+  include_tasks: secure_setup.yml
 
 - name: MySQL - Delete anonymous mysql user
   mysql_user:
