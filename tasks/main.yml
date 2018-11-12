@@ -1,12 +1,4 @@
 ---
-- name: Specify MySQL root password before installing
-  debconf: name='mysql-server' question='mysql-server/root_password' value='{{mysql_root_password}}' vtype='password'
-  changed_when: false
-
-- name: Confirm MySQL root password before installing
-  debconf: name='mysql-server' question='mysql-server/root_password_again' value='{{mysql_root_password}}' vtype='password'
-  changed_when: false
-
 - name: Installing MySQL server for {{ ansible_distribution }}-{{ ansible_distribution_version }}
   include_tasks: Debian_install.yml
   when: ansible_os_family == 'Debian'
