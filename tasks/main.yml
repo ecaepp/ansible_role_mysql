@@ -11,20 +11,6 @@
 - name: MySQL - Secure Setup
   include_tasks: secure_setup.yml
 
-- name: MySQL - Delete anonymous mysql user
-  mysql_user:
-    name: ""
-    state: absent
-    login_user: root
-    login_password: "{{ mysql_root_password }}"
-
-- name: MySQL - Remove mysql test database
-  mysql_db:
-    name: test
-    state: absent
-    login_user: root
-    login_password: "{{ mysql_root_password }}"
-
 - name: Generate /etc/my.cnf config
   template:
     src: templates/server.cnf.j2
