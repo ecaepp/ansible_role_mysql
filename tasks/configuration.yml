@@ -1,0 +1,14 @@
+---
+- name: Creating server and client my.cnf files
+- name: copy root my.cnf file
+  template:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    owner: "{{ item.owner }}"
+    group: "{{ item.group }}"
+    mode: "{{ item.mode }}"
+  notify: "restart mysql"
+  with_items:
+    - {'src': 'templates/root.cnf.j2', 'dest': '/root/.my.cnf', 'owner': 'root', 'group': 'root', 'mode': '0600'}
+    - {'src': 'templates/user.cnf.j2', 'dest': '/home/mysql/.my.cnf', 'owner': 'mysql', 'group': 'mysql', 'mode': '0600'}
+    - {'src': 'templates/server.cnf.j2', 'dest': '/etc/mysql/conf.d/my.cnf', 'owner': 'root', 'group': 'root', 'mode': '0644'}
