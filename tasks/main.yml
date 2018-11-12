@@ -11,19 +11,6 @@
   include_tasks: Debian_install.yml
   when: ansible_os_family == 'Debian'
 
-- name: MySQL - Update mysql root passwd
-  mysql_user:
-    name: root
-    host: "{{ item }}"
-    password: "{{ mysql_root_password }}"
-    login_user: "{{ mysql_root_username }}"
-    login_password: "{{ mysql_root_password }}"
-  with_items:
-    - "{{ ansible_hostname }}"
-    - 127.0.0.1
-    - ::1
-    - localhost
-
 - include_tasks: configure_users.yml
 
 
