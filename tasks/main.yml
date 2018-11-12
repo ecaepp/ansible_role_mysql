@@ -1,40 +1,53 @@
 ---
+- name: Specify MySQL root password before installing
+  debconf: name='mysql-server' question='mysql-server/root_password' value='{{mysql_root_password}}' vtype='password'
+  become: true
+
+- name: Confirm MySQL root password before installing
+  debconf: name='mysql-server' question='mysql-server/root_password_again' value='{{mysql_root_password}}' vtype='password'
+  become: true
+
 - name: Installing MySQL server for {{ ansible_distribution }}-{{ ansible_distribution_version }}
   include_tasks: Debian_install.yml
   when: ansible_os_family == 'Debian'
-
-- name: Enable and start MySQL
-  service:
-    name: mysql
-    enabled: true
-    state: started
 
 - name: MySQL - Update mysql root passwd
   mysql_user:
     name: root
     host: "{{ item }}"
-    password: "{{ mysql_root_new_pass }}"
-    login_user: "{{ mysql_root_user }}"
-    login_password: "{{ mysql_root_old_pass }}"
+    password: "{{ mysql_root_password }}"
+    login_user: "{{ mysql_root_username }}"
+    login_password: "{{ mysql_root_password }}"
   with_items:
     - "{{ ansible_hostname }}"
     - 127.0.0.1
     - ::1
     - localhost
 
+- include_tasks: configure_users.yml
+
+
 - name: MySQL - Delete anonymous mysql user
   mysql_user:
     name: ""
     state: absent
     login_user: root
-    login_password: "{{ mysql_root_new_pass }}"
+    login_password: "{{ mysql_root_password }}"
 
 - name: MySQL - Remove mysql test database
   mysql_db:
     name: test
     state: absent
     login_user: root
-    login_password: "{{ mysql_root_new_pass }}"
+    login_password: "{{ mysql_root_password }}"
+
+- name: print error.log
+  command: /bin/cat /var/log/mysql/error.log
+  register: error_log
+  changed_when: false
+
+- debug:
+    msg: "{{ error_log.stdout_lines }}"
 
 - name: Generate /etc/my.cnf config
   template:
