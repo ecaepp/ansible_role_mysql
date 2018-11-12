@@ -13,7 +13,6 @@
 
 - include_tasks: configure_users.yml
 
-
 - name: MySQL - Delete anonymous mysql user
   mysql_user:
     name: ""
