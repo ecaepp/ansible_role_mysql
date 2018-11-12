@@ -1,7 +1,12 @@
 ---
+- name: Running pre_tasks
+  include_tasks: pre_tasks.yml
+
 - name: Installing MySQL server for {{ ansible_distribution }}-{{ ansible_distribution_version }}
   include_tasks: Debian_install.yml
-  when: ansible_os_family == 'Debian'
+  when: 
+  - ansible_os_family == 'Debian'
+  - mysql_bin.stat.exists == False
 
 - include_tasks: configure_users.yml
 
