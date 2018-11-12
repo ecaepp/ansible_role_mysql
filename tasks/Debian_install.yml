@@ -9,3 +9,9 @@
   apt:
     pkg: "{{ dependences }}"
     state: present
+
+- name: Enable and started MySQL
+  service:
+    name: mysql
+    state: started
+    enabled: true
