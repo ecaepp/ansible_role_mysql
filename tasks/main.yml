@@ -27,14 +27,6 @@
     login_user: root
     login_password: "{{ mysql_root_password }}"
 
-- name: print error.log
-  command: /bin/cat /var/log/mysql/error.log
-  register: error_log
-  changed_when: false
-
-- debug:
-    msg: "{{ error_log.stdout_lines }}"
-
 - name: Generate /etc/my.cnf config
   template:
     src: templates/server.cnf.j2
