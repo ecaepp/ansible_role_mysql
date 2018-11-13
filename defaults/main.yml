@@ -4,19 +4,26 @@ mysql_version: 5.7
 dependences:
   - python-mysqldb
 
+# root User: These var are used to set and change the default root password for MySQL.
+# The `mysql_root_default_password` is set as the default root password prior to MySQL install via `debconf`.
+# The `mysql_root_password` is set to default to the password set in `mysql_root_default_password` this can be easily changed using variable precedence,
+# and should be a stored in `ansible-vault`.
+# These are are also used to generate the root user's `my.cnf` client file.
 mysql_root_password: "{{ mysql_root_default_password }}"
 mysql_root_default_password: p@$$w0rD1!
 mysql_root_username: root
+
+# mysql User: These vars are used for generating the clint side my.cnf for MySQL
 mysql_user_username: user
 mysql_user_password:
 
+# The following variables are used to generate the server side `my.cnf` conf file for MySQL.
+# The configs below are are set to get MySQL up and running and can be easily be overridden using ansible's variable precedence.
 #
-# my.cnf default configs
-#
-# client configs
+# [client]
 mysql_port: 3306
 mysql_socket: /var/lib/mysql/mysql.sock
-# mysqld configs
+# [mysqld]
 # general configs #
 mysql_user: mysql
 default_storage_engine: InnoDB
@@ -28,7 +35,6 @@ myisam_recover_options: FORCE,BACKUP
 max_allowed_packet: 16M
 max_connect_errors: 10000000
 sql_mode: STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_AUTO_VALUE_ON_ZERO,NO_ENGINE_SUBSTITUTION,NO_ZERO_DATE,NO_ZERO_IN_DATE,ONLY_FULL_GROUP_BY
-
 sysdate_is_now: 1
 innodb: FORCE
 # data storage #
