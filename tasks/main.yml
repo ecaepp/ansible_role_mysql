@@ -5,8 +5,8 @@
 - name: Installing MySQL server for {{ ansible_distribution }}-{{ ansible_distribution_version }}
   include_tasks: Debian_install.yml
   when:
-  - ansible_os_family == 'Debian'
-  - mysql_bin.stat.exists == False
+    - ansible_os_family == 'Debian'
+    - mysql_bin.stat.exists == False
 
 - name: MySQL - Secure Setup
   include_tasks: secure_setup.yml
