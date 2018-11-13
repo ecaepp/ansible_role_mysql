@@ -9,13 +9,14 @@ dependences:
 # The `mysql_root_password` is set to default to the password set in `mysql_root_default_password` this can be easily changed using variable precedence,
 # and should be a stored in `ansible-vault`.
 # These are are also used to generate the root user's `my.cnf` client file.
-mysql_root_password: "{{ mysql_root_default_password }}"
 mysql_root_default_password: p@$$w0rD1!
+mysql_root_password: "{{ mysql_root_default_password }}"
 mysql_root_username: root
 
 # mysql User: These vars are used for generating the clint side my.cnf for MySQL
-mysql_user_username: user
+mysql_user_username: mysql
 mysql_user_password:
+mysql_user_group: mysql
 
 # The following variables are used to generate the server side `my.cnf` conf file for MySQL.
 # The configs below are are set to get MySQL up and running and can be easily be overridden using ansible's variable precedence.
