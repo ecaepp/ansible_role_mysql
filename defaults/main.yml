@@ -14,9 +14,9 @@ mysql_root_password: "{{ mysql_root_default_password }}"
 mysql_root_username: root
 
 # mysql User: These vars are used for generating the clint side my.cnf for MySQL
-mysql_user_username: mysql
+mysql_user_username: root
 mysql_user_password:
-mysql_user_group: mysql
+mysql_user_group: root
 
 # The following variables are used to generate the server side `my.cnf` conf file for MySQL.
 # The configs below are are set to get MySQL up and running and can be easily be overridden using ansible's variable precedence.
@@ -74,3 +74,12 @@ mysql_database: []
 #  - collation: utf8_general_ci
 #  - encoding: utf-8
 #  - replicate: 1
+
+# MySQL users
+mysql_users: []
+# host: myuser
+# password: somepassword
+# priv: my_db.*:ALL
+# state: present
+# append_privs: no
+# encrypted: no
