@@ -10,5 +10,5 @@
   notify: "restart mysql"
   with_items:
     - {'src': 'templates/root.cnf.j2', 'dest': '/root/.my.cnf', 'owner': 'root', 'group': 'root', 'mode': '0600'}
-    - {'src': 'templates/user.cnf.j2', 'dest': '/home/mysql/.my.cnf', 'owner': 'mysql', 'group': 'mysql', 'mode': '0600'}
+    - {'src': 'templates/user.cnf.j2', 'dest': '/home/{{ mysql_user_username }}/.my.cnf', 'owner': '{{ mysql_user_username }}', 'group': '{{ mysql_user_group }}', 'mode': '0600'}
     - {'src': 'templates/server.cnf.j2', 'dest': '/etc/mysql/conf.d/my.cnf', 'owner': 'root', 'group': 'root', 'mode': '0644'}
