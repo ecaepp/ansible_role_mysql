@@ -4,17 +4,9 @@
 
 - name: Installing MySQL server for {{ ansible_distribution }}-{{ ansible_distribution_version }}
   include_tasks: Debian_install.yml
-  when: 
+  when:
   - ansible_os_family == 'Debian'
   - mysql_bin.stat.exists == False
 
 - name: MySQL - Secure Setup
   include_tasks: secure_setup.yml
-
-- name: Generate /etc/my.cnf config
-  template:
-    src: templates/server.cnf.j2
-    dest: /etc/mysql/conf.d/my.cnf
-    owner: root
-    group: root
-    mode: 0644
