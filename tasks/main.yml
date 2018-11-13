@@ -10,3 +10,6 @@
 
 - name: MySQL - Secure Setup
   include_tasks: secure_setup.yml
+
+- name: Generate config files from templates
+  include_tasks: configuration.yml
