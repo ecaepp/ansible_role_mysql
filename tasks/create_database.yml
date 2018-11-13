@@ -1,0 +1,9 @@
+---
+- name: Creating database {{ item.name }}
+  mysql_db:
+    name: "{{ item.name  | default('utf8_general_ci') }}"
+    collation: "{{ item.collation | default('utf8_general_ci') }}"
+    encoding: "{{ item.encoding | default('utf-8') }}"
+    state: "{{ item.state | default('present') }}"
+  with_items:
+    - "{{ mysql_database }}"
