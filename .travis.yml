@@ -21,11 +21,12 @@ script: molecule test
 after_success:
   deploy:
     provider: releases
+    skip_cleanup: true
     api_key:
       secure: $GITHUB_API_TOKEN
-    file: ansible_role_mysql
+    file: ansible_role_$ROLE_NAME
     on:
-      repo: ecaepp/ansible_role_mysql
+      repo: ecaepp/ansible_role_$ROLE_NAME
       branch: master
       tags: true
     
