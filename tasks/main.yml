@@ -13,3 +13,15 @@
 
 - name: MySQL - Generate config files from templates
   include_tasks: configuration.yml
+
+- name: MySQL - Creating database(s)
+  include_tasks: create_database.yml
+  when:
+    - 'mysql_database is defined'
+    - 'mysql_database != None'
+
+- name: MySQL - Create database accounts
+  include_tasks: database_users.yml
+  when:
+    - 'mysql_users is defined'
+    - 'mysql_users != None'
