@@ -1,0 +1,27 @@
+---
+- name: MySQL - Update mysql root passwd
+  mysql_user:
+    name: root
+    host: "{{ item }}"
+    password: "{{ mysql_root_password }}"
+    login_user: "{{ mysql_root_username }}"
+    login_password: "{{ mysql_root_default_password }}"
+  with_items:
+    - "{{ ansible_hostname }}"
+    - 127.0.0.1
+    - ::1
+    - localhost
+
+- name: MySQL - Delete anonymous mysql user
+  mysql_user:
+    name: ""
+    state: absent
+    login_user: root
+    login_password: "{{ mysql_root_password }}"
+
+- name: MySQL - Remove mysql test database
+  mysql_db:
+    name: test
+    state: absent
+    login_user: root
+    login_password: "{{ mysql_root_password }}"

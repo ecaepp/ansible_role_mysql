@@ -1,0 +1,38 @@
+---
+- name: Creating MySQL admin user group
+  group:
+    name: "{{ mysql_user_group }}"
+    state: present
+  when: 'mysql_user_username != mysql_root_username'
+
+- name: Creating MySQL admin account
+  user:
+    name: "{{ mysql_user_username }}"
+    state: present
+    group: "{{ mysql_user_group }}"
+    groups: null
+    home: "{{ mysql_user_home_dir }}"
+    system: true
+    shell: /usr/sbin/nologin
+  when: 'mysql_user_username != mysql_root_username'
+
+- name: Create client my.cnf file
+  template:
+    src: templates/user.cnf.j2
+    dest: "{{ mysql_user_home_dir }}/.mycnf"
+    owner: "{{ mysql_user_username }}"
+    group: "{{ mysql_user_group }}"
+    mode: 0600
+  when: mysql_user_username != mysql_root_username
+
+- name: Creating server and client my.cnf files
+  template:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    owner: "{{ item.owner }}"
+    group: "{{ item.group }}"
+    mode: "{{ item.mode }}"
+  notify: "restart mysql"
+  with_items:
+    - {'src': 'templates/root.cnf.j2', 'dest': '/root/.my.cnf', 'owner': 'root', 'group': 'root', 'mode': '0600'}
+    - {'src': 'templates/server.cnf.j2', 'dest': '/etc/mysql/conf.d/my.cnf', 'owner': 'root', 'group': 'root', 'mode': '0644'}

@@ -1,44 +1,27 @@
 ---
-- name: Installing MySQL-{{ mysql_version }}
-  apt:
-    pkg: mysql-server-{{ mysql_version }}
-    state: present
-    update_cache: true
+- name: MySQL - Running pre_tasks
+  include_tasks: pre_tasks.yml
 
-- name: Installing dependences {{ dependences }}
-  apt:
-    pkg: "{{ dependences }}"
-    state: present
+- name: MySQL - Installing MySQL server for {{ ansible_distribution }}-{{ ansible_distribution_version }}
+  include_tasks: Debian_install.yml
+  when:
+    - ansible_os_family == 'Debian'
+    - mysql_bin.stat.exists == False
 
-- name: Enable and start MySQL
-  service:
-    name: mysql
-    enabled: true
-    state: started
+- name: MySQL - Secure Setup
+  include_tasks: secure_setup.yml
 
-- name: MySQL - Update mysql root passwd
-  mysql_user:
-    name: root
-    host: "{{ item }}"
-    password: "{{ mysql_root_new_pass }}"
-    login_user: "{{ mysql_root_user }}"
-    login_password: "{{ mysql_root_old_pass }}"
-  with_items:
-    - "{{ ansible_hostname }}"
-    - 127.0.0.1
-    - ::1
-    - localhost
+- name: MySQL - Generate config files from templates
+  include_tasks: configuration.yml
 
-- name: MySQL - Delete anonymous mysql user
-  mysql_user:
-    name: ""
-    state: absent
-    login_user: root
-    login_password: "{{ mysql_root_new_pass }}"
+- name: MySQL - Creating database(s)
+  include_tasks: create_database.yml
+  when:
+    - 'mysql_database is defined'
+    - 'mysql_database != None'
 
-- name: MySQL - Remove mysql test database
-  mysql_db:
-    name: test
-    state: absent
-    login_user: root
-    login_password: "{{ mysql_root_new_pass }}"
+- name: MySQL - Create database accounts
+  include_tasks: database_users.yml
+  when:
+    - 'mysql_users is defined'
+    - 'mysql_users != None'

@@ -1,0 +1,4 @@
+---
+- name: Check if MySQL-{{ mysql_version }} is installed
+  stat: path=/usr/bin/mysql
+  register: mysql_bin
