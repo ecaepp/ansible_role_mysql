@@ -8,7 +8,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-### Changed
+## [1.4.4] - 2018-11-26
+
+
+## [1.4.3] - 2018-11-26
+
+### Change
+
+6b25cb4 [CHANGE] Added `latest` tag to docker image. (ecaepp)
+
+### Fix
+
+f6f9b1c [FIX] Commented out matrix envar (ecaepp)
 
 ## [1.4.0] - 2018-11-12
 
