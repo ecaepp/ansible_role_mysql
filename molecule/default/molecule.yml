@@ -7,7 +7,7 @@ lint:
   name: yamllint
 platforms:
   - name: instance
-    image: geerlingguy/docker-${MOLECULE_DISTRO:-ubuntu1604}-ansible
+    image: geerlingguy/docker-${MOLECULE_DISTRO:-ubuntu1604}-ansible:latest
     command: ${MOLECULE_DOCKER_COMMAND:-"sleep infinity"}
     privileged: true
     pull: true
