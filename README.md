@@ -148,7 +148,7 @@ When ran defautly the role will initialize an empty arry that triggers a conditi
 mysql_database: []
 #  - name: example
 #  - collation: utf8_general_ci
-#  - encoding: utf-8
+#  - encoding: utf8
 #  - replicate: 1
 ```
 
