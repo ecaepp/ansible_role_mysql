@@ -78,7 +78,8 @@ mysql_database: []
 
 # MySQL users
 mysql_users: []
-# host: myuser
+# host: localhost
+# name: mysql
 # password: somepassword
 # priv: my_db.*:ALL
 # state: present

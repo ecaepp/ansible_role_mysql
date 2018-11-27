@@ -2,6 +2,7 @@
 - name: Create MySQL user accounts and assign privs
   mysql_user:
     host: "{{ item.host | default('localhost') }}"
+    user: "{{ item.name }}"
     password: "{{ item.password }}"
     priv: "{{ item.priv | default('*.*:USAGE') }}"
     state: "{{ item.state | default('present') }}"
