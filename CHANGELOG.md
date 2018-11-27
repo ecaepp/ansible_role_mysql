@@ -10,6 +10,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [1.4.4] - 2018-11-26
 
+### Change
+
+36d1293 [CHANGE] Updated. (ecaepp)
+
+### Documentation
+
+922c12f [DOC] Wrote more documentation. (ecaepp)
 
 ## [1.4.3] - 2018-11-26
 
