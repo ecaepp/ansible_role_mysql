@@ -1,12 +1,12 @@
 ---
 - name: Create MySQL user accounts and assign privs
   mysql_user:
-    host: "{{ item.host | default('localhost') }}"
+    host: "{{ item.host }}"
     user: "{{ item.name }}"
     password: "{{ item.password }}"
-    priv: "{{ item.priv | default('*.*:USAGE') }}"
-    state: "{{ item.state | default('present') }}"
-    append_privs: "{{ item.append_privs | default('no') }}"
-    encrypted: "{{ item.encrypted | default('no') }}"
+    priv: "{{ item.priv }}"
+    state: "{{ item.state }}"
+    append_privs: "{{ item.append_privs }}"
+    encrypted: "{{ item.encrypted }}"
   with_items: "{{ mysql_users }}"
   no_log: true

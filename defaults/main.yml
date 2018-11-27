@@ -83,5 +83,5 @@ mysql_users: []
 # password: somepassword
 # priv: my_db.*:ALL
 # state: present
-# append_privs: no
-# encrypted: no
+# append_privs: false
+# encrypted: false
