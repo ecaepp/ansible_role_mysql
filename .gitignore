@@ -1,3 +1,4 @@
 **/__pycache__
 .ruby-version
 files/my.cnf
+.vscode
