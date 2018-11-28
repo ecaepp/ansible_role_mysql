@@ -24,7 +24,7 @@ mysql_user_home_dir: /home/{{ mysql_user_username}}
 #
 # [client]
 mysql_port: 3306
-mysql_socket: /var/lib/mysql/mysql.sock
+mysql_socket: /var/run/mysqld/mysqld.sock
 # [mysqld]
 # general configs #
 mysql_user: mysql
